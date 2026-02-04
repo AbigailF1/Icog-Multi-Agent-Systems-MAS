@@ -88,3 +88,26 @@ The system **simulates** realistic incident details (version numbers, config key
 1. **Standard**: “Checkout service down; new DB migration pushed.”
 2. **Red Herring**: “Slow loading; frontend suspects DDoS, backend suspects DB.”
 3. **Ambiguous**: “CPU spikes across clusters; no deploys; no obvious logs.”
+
+## Optional PDF Summarizer (Mini MAS)
+
+If you want a simple, visible proof of MAS on a single document, use the PDF summarizer in [src2/pdf_summarizer.py](src2/pdf_summarizer.py).
+
+**Install:**
+
+- pypdf
+
+**Run:**
+
+```
+**UI:**
+```
+
+python -m streamlit run src2/pdf_ui.py
+
+```
+python src2/pdf_summarizer.py path/to/your.pdf
+```
+
+- Document Extractor → pulls key points
+- Summarizer → writes a short summary based only on those points

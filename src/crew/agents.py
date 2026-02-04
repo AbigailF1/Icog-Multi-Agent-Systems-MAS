@@ -8,9 +8,18 @@ from .tools import build_tools
 def build_llm() -> LLM | None:
     model = os.getenv("LLM_MODEL")
     if model:
-        return LLM(model=model)
+        if "gemini" in model and not (
+            os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+        ):
+            return None
+        if "gpt" in model and not os.getenv("OPENAI_API_KEY"):
+            return None
+        try:
+            return LLM(model=model)
+        except ImportError:
+            return None
 
-    if os.getenv("GOOGLE_API_KEY"):
+    if os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY"):
         return LLM(model="gemini/gemini-1.5-flash")
 
     if os.getenv("OPENAI_API_KEY"):
