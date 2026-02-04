@@ -1,0 +1,5 @@
+.env
+.venv/
+.crewai_memory/
+__pycache__/
+*.pyc
